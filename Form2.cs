@@ -334,6 +334,11 @@ namespace GKHelper
             LockMenu();
         }
 
+        private void creditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This project is brought to you by:\nXGN & Zzzyt\nOpen source at:https://github.com/XiaoGeNintendo/GKHelper \nHell Hole Studios 2022", "Credit!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
+
         private void 置顶ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TopMost = !TopMost;
