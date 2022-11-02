@@ -61,7 +61,7 @@ namespace GKHelper
                     //create label 1
                     Label lbl = new Label
                     {
-                        Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))),
+                        Font = new System.Drawing.Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))),
                         Location = new System.Drawing.Point(3 + 26 * (lessons.Count - 1), 195),
                         Name = "lessonLabel_" + lessons.Count,
                         Size = new System.Drawing.Size(28, 42),

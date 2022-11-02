@@ -44,20 +44,20 @@
             this.窗口ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.无边框ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.有边框ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.锁定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.置顶ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.置底ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重载时刻表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.背景色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.缩放ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.更改值日岗位责任ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.改前景色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.锁定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.置顶ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.缩放ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rubbishLabel = new System.Windows.Forms.Label();
             this.dn2 = new System.Windows.Forms.Label();
-            this.更改值日岗位责任ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
-            this.改前景色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,17 +65,17 @@
             // 
             this.timeLabel.AutoSize = true;
             this.timeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.timeLabel.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.timeLabel.Font = new System.Drawing.Font("华文中宋", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.timeLabel.Location = new System.Drawing.Point(7, 39);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(66, 28);
+            this.timeLabel.Size = new System.Drawing.Size(65, 24);
             this.timeLabel.TabIndex = 0;
             this.timeLabel.Text = "3分后";
             // 
             // subjectLabel
             // 
             this.subjectLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.subjectLabel.Font = new System.Drawing.Font("微软雅黑", 63.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.subjectLabel.Font = new System.Drawing.Font("华文中宋", 63.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.subjectLabel.Location = new System.Drawing.Point(12, 67);
             this.subjectLabel.Name = "subjectLabel";
             this.subjectLabel.Size = new System.Drawing.Size(315, 111);
@@ -97,20 +97,20 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Font = new System.Drawing.Font("华文中宋", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(4, 253);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 28);
+            this.label4.Size = new System.Drawing.Size(73, 24);
             this.label4.TabIndex = 4;
             this.label4.Text = "离高考";
             // 
             // gkTimer
             // 
             this.gkTimer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.gkTimer.Font = new System.Drawing.Font("微软雅黑", 63.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.gkTimer.Location = new System.Drawing.Point(9, 281);
+            this.gkTimer.Font = new System.Drawing.Font("Cambria", 63.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gkTimer.Location = new System.Drawing.Point(29, 280);
             this.gkTimer.Name = "gkTimer";
-            this.gkTimer.Size = new System.Drawing.Size(280, 111);
+            this.gkTimer.Size = new System.Drawing.Size(253, 111);
             this.gkTimer.TabIndex = 5;
             this.gkTimer.Text = "114";
             this.gkTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -119,8 +119,8 @@
             // 
             this.label6.AutoEllipsis = true;
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(295, 353);
+            this.label6.Font = new System.Drawing.Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(288, 351);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(39, 28);
             this.label6.TabIndex = 6;
@@ -139,23 +139,22 @@
             // 
             this.dn1.AutoSize = true;
             this.dn1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dn1.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dn1.Font = new System.Drawing.Font("华文中宋", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dn1.Location = new System.Drawing.Point(4, 395);
             this.dn1.Name = "dn1";
-            this.dn1.Size = new System.Drawing.Size(75, 28);
+            this.dn1.Size = new System.Drawing.Size(73, 24);
             this.dn1.TabIndex = 8;
             this.dn1.Text = "擦黑板";
             // 
             // dutyLabel
             // 
             this.dutyLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dutyLabel.Font = new System.Drawing.Font("微软雅黑", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dutyLabel.Font = new System.Drawing.Font("华文中宋", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dutyLabel.Location = new System.Drawing.Point(23, 423);
             this.dutyLabel.Name = "dutyLabel";
             this.dutyLabel.Size = new System.Drawing.Size(148, 100);
             this.dutyLabel.TabIndex = 9;
             this.dutyLabel.Text = "赵玉琪\r\n赵玉琪";
-            this.dutyLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // timer1
             // 
@@ -167,10 +166,10 @@
             // 
             this.nowTimeLabel.AutoSize = true;
             this.nowTimeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.nowTimeLabel.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nowTimeLabel.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nowTimeLabel.Location = new System.Drawing.Point(2, 568);
             this.nowTimeLabel.Name = "nowTimeLabel";
-            this.nowTimeLabel.Size = new System.Drawing.Size(117, 28);
+            this.nowTimeLabel.Size = new System.Drawing.Size(122, 25);
             this.nowTimeLabel.TabIndex = 10;
             this.nowTimeLabel.Text = "时间加载中";
             // 
@@ -204,41 +203,76 @@
             // 无边框ToolStripMenuItem
             // 
             this.无边框ToolStripMenuItem.Name = "无边框ToolStripMenuItem";
-            this.无边框ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.无边框ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.无边框ToolStripMenuItem.Text = "无边框";
             this.无边框ToolStripMenuItem.Click += new System.EventHandler(this.无边框ToolStripMenuItem_Click);
             // 
             // 有边框ToolStripMenuItem
             // 
             this.有边框ToolStripMenuItem.Name = "有边框ToolStripMenuItem";
-            this.有边框ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.有边框ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.有边框ToolStripMenuItem.Text = "有边框";
             this.有边框ToolStripMenuItem.Click += new System.EventHandler(this.有边框ToolStripMenuItem_Click);
+            // 
+            // 锁定ToolStripMenuItem
+            // 
+            this.锁定ToolStripMenuItem.Name = "锁定ToolStripMenuItem";
+            this.锁定ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.锁定ToolStripMenuItem.Text = "锁定";
+            this.锁定ToolStripMenuItem.Click += new System.EventHandler(this.锁定ToolStripMenuItem_Click);
+            // 
+            // 置顶ToolStripMenuItem
+            // 
+            this.置顶ToolStripMenuItem.Name = "置顶ToolStripMenuItem";
+            this.置顶ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.置顶ToolStripMenuItem.Text = "置顶";
+            this.置顶ToolStripMenuItem.Click += new System.EventHandler(this.置顶ToolStripMenuItem_Click);
             // 
             // 置底ToolStripMenuItem
             // 
             this.置底ToolStripMenuItem.Name = "置底ToolStripMenuItem";
-            this.置底ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.置底ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.置底ToolStripMenuItem.Text = "置底";
             this.置底ToolStripMenuItem.Click += new System.EventHandler(this.置底ToolStripMenuItem_Click);
             // 
             // 重载时刻表ToolStripMenuItem
             // 
             this.重载时刻表ToolStripMenuItem.Name = "重载时刻表ToolStripMenuItem";
-            this.重载时刻表ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.重载时刻表ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.重载时刻表ToolStripMenuItem.Text = "重载时刻表";
             this.重载时刻表ToolStripMenuItem.Click += new System.EventHandler(this.重载时刻表ToolStripMenuItem_Click);
             // 
             // 背景色ToolStripMenuItem
             // 
             this.背景色ToolStripMenuItem.Name = "背景色ToolStripMenuItem";
-            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.背景色ToolStripMenuItem.Text = "背景色";
             this.背景色ToolStripMenuItem.Click += new System.EventHandler(this.背景色ToolStripMenuItem_Click);
             // 
+            // 缩放ToolStripMenuItem
+            // 
+            this.缩放ToolStripMenuItem.Name = "缩放ToolStripMenuItem";
+            this.缩放ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.缩放ToolStripMenuItem.Text = "缩放";
+            this.缩放ToolStripMenuItem.Click += new System.EventHandler(this.缩放ToolStripMenuItem_Click);
+            // 
+            // 更改值日岗位责任ToolStripMenuItem
+            // 
+            this.更改值日岗位责任ToolStripMenuItem.Name = "更改值日岗位责任ToolStripMenuItem";
+            this.更改值日岗位责任ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.更改值日岗位责任ToolStripMenuItem.Text = "更改值日岗位责任";
+            this.更改值日岗位责任ToolStripMenuItem.Click += new System.EventHandler(this.更改值日岗位责任ToolStripMenuItem_Click);
+            // 
+            // 改前景色ToolStripMenuItem
+            // 
+            this.改前景色ToolStripMenuItem.Name = "改前景色ToolStripMenuItem";
+            this.改前景色ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.改前景色ToolStripMenuItem.Text = "改前景色";
+            this.改前景色ToolStripMenuItem.Click += new System.EventHandler(this.改前景色ToolStripMenuItem_Click);
+            // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(3, 195);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 42);
@@ -253,62 +287,33 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(239, 12);
             this.label2.TabIndex = 13;
-            this.label2.Text = "V1.1试运行中……欢迎提出建设性意见→gwq";
+            this.label2.Text = "V1.2试运行中……欢迎提出建设性意见→gwq";
             // 
             // colorDialog1
             // 
             this.colorDialog1.AnyColor = true;
             this.colorDialog1.ShowHelp = true;
             // 
-            // 锁定ToolStripMenuItem
-            // 
-            this.锁定ToolStripMenuItem.Name = "锁定ToolStripMenuItem";
-            this.锁定ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.锁定ToolStripMenuItem.Text = "锁定";
-            this.锁定ToolStripMenuItem.Click += new System.EventHandler(this.锁定ToolStripMenuItem_Click);
-            // 
-            // 置顶ToolStripMenuItem
-            // 
-            this.置顶ToolStripMenuItem.Name = "置顶ToolStripMenuItem";
-            this.置顶ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.置顶ToolStripMenuItem.Text = "置顶";
-            this.置顶ToolStripMenuItem.Click += new System.EventHandler(this.置顶ToolStripMenuItem_Click);
-            // 
-            // 缩放ToolStripMenuItem
-            // 
-            this.缩放ToolStripMenuItem.Name = "缩放ToolStripMenuItem";
-            this.缩放ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.缩放ToolStripMenuItem.Text = "缩放";
-            this.缩放ToolStripMenuItem.Click += new System.EventHandler(this.缩放ToolStripMenuItem_Click);
-            // 
             // rubbishLabel
             // 
             this.rubbishLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.rubbishLabel.Font = new System.Drawing.Font("微软雅黑", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rubbishLabel.Font = new System.Drawing.Font("华文中宋", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rubbishLabel.Location = new System.Drawing.Point(177, 423);
             this.rubbishLabel.Name = "rubbishLabel";
             this.rubbishLabel.Size = new System.Drawing.Size(148, 100);
             this.rubbishLabel.TabIndex = 15;
             this.rubbishLabel.Text = "赵玉琪\r\n赵玉琪";
-            this.rubbishLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // dn2
             // 
             this.dn2.AutoSize = true;
             this.dn2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dn2.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dn2.Font = new System.Drawing.Font("华文中宋", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dn2.Location = new System.Drawing.Point(158, 395);
             this.dn2.Name = "dn2";
-            this.dn2.Size = new System.Drawing.Size(75, 28);
+            this.dn2.Size = new System.Drawing.Size(73, 24);
             this.dn2.TabIndex = 14;
             this.dn2.Text = "倒垃圾";
-            // 
-            // 更改值日岗位责任ToolStripMenuItem
-            // 
-            this.更改值日岗位责任ToolStripMenuItem.Name = "更改值日岗位责任ToolStripMenuItem";
-            this.更改值日岗位责任ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.更改值日岗位责任ToolStripMenuItem.Text = "更改值日岗位责任";
-            this.更改值日岗位责任ToolStripMenuItem.Click += new System.EventHandler(this.更改值日岗位责任ToolStripMenuItem_Click);
             // 
             // label3
             // 
@@ -319,13 +324,6 @@
             this.label3.TabIndex = 16;
             this.label3.Text = "语\r\n文";
             this.label3.Visible = false;
-            // 
-            // 改前景色ToolStripMenuItem
-            // 
-            this.改前景色ToolStripMenuItem.Name = "改前景色ToolStripMenuItem";
-            this.改前景色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.改前景色ToolStripMenuItem.Text = "改前景色";
-            this.改前景色ToolStripMenuItem.Click += new System.EventHandler(this.改前景色ToolStripMenuItem_Click);
             // 
             // form
             // 
