@@ -92,10 +92,20 @@ namespace GKHelper
             InitializeComponent();
 
             //Load Configuration File
-            using(StreamReader sr=new StreamReader("Config.txt"))
+            using (StreamReader sr = new StreamReader("Config.txt"))
             {
                 gk = DateTime.Parse(sr.ReadLine());
                 Console.WriteLine("Read Gaokao Time:" + gk);
+                try
+                {
+                    string res = sr.ReadLine();
+                    dn1.Text = res.Split('|')[0];
+                    dn2.Text = res.Split('|')[1];
+                }catch(Exception ex)
+                {
+                    MessageBox.Show("Cannot load duty config:\n" + ex.Message + "\n" + ex.StackTrace, "Fatal Error!!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Environment.Exit(2);
+                }
             }
 
             //Try to get current date and load given file
@@ -118,7 +128,7 @@ namespace GKHelper
                 ReadTimetable(name);
             }catch(Exception e)
             {
-                MessageBox.Show(e+"\n"+e.StackTrace, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e+"\n"+e.StackTrace, "Fatal Error!!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(e+"\n"+e.StackTrace);
                 Environment.Exit(1);
             }
@@ -374,7 +384,7 @@ namespace GKHelper
 
         private void 更改值日岗位责任ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string res = Interaction.InputBox("Enter new positions for duty display, seperated with '|':", "Enter", "擦黑板|倒垃圾");
+            string res = Interaction.InputBox("Enter new positions for duty display, seperated with '|':\n Fun fact: You can change it in Config.txt permanently!", "Enter", "擦黑板|倒垃圾");
             try {
                 if (res == "" || res==null)
                 {

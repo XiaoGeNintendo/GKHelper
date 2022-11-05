@@ -52,13 +52,13 @@
             this.缩放ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更改值日岗位责任ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.改前景色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.creditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.rubbishLabel = new System.Windows.Forms.Label();
             this.dn2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.creditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -205,72 +205,79 @@
             // 无边框ToolStripMenuItem
             // 
             this.无边框ToolStripMenuItem.Name = "无边框ToolStripMenuItem";
-            this.无边框ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.无边框ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.无边框ToolStripMenuItem.Text = "无边框";
             this.无边框ToolStripMenuItem.Click += new System.EventHandler(this.无边框ToolStripMenuItem_Click);
             // 
             // 有边框ToolStripMenuItem
             // 
             this.有边框ToolStripMenuItem.Name = "有边框ToolStripMenuItem";
-            this.有边框ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.有边框ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.有边框ToolStripMenuItem.Text = "有边框";
             this.有边框ToolStripMenuItem.Click += new System.EventHandler(this.有边框ToolStripMenuItem_Click);
             // 
             // 锁定ToolStripMenuItem
             // 
             this.锁定ToolStripMenuItem.Name = "锁定ToolStripMenuItem";
-            this.锁定ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.锁定ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.锁定ToolStripMenuItem.Text = "锁定";
             this.锁定ToolStripMenuItem.Click += new System.EventHandler(this.锁定ToolStripMenuItem_Click);
             // 
             // 置顶ToolStripMenuItem
             // 
             this.置顶ToolStripMenuItem.Name = "置顶ToolStripMenuItem";
-            this.置顶ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.置顶ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.置顶ToolStripMenuItem.Text = "置顶";
             this.置顶ToolStripMenuItem.Click += new System.EventHandler(this.置顶ToolStripMenuItem_Click);
             // 
             // 置底ToolStripMenuItem
             // 
             this.置底ToolStripMenuItem.Name = "置底ToolStripMenuItem";
-            this.置底ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.置底ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.置底ToolStripMenuItem.Text = "置底";
             this.置底ToolStripMenuItem.Click += new System.EventHandler(this.置底ToolStripMenuItem_Click);
             // 
             // 重载时刻表ToolStripMenuItem
             // 
             this.重载时刻表ToolStripMenuItem.Name = "重载时刻表ToolStripMenuItem";
-            this.重载时刻表ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.重载时刻表ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.重载时刻表ToolStripMenuItem.Text = "重载时刻表";
             this.重载时刻表ToolStripMenuItem.Click += new System.EventHandler(this.重载时刻表ToolStripMenuItem_Click);
             // 
             // 背景色ToolStripMenuItem
             // 
             this.背景色ToolStripMenuItem.Name = "背景色ToolStripMenuItem";
-            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.背景色ToolStripMenuItem.Text = "背景色";
             this.背景色ToolStripMenuItem.Click += new System.EventHandler(this.背景色ToolStripMenuItem_Click);
             // 
             // 缩放ToolStripMenuItem
             // 
             this.缩放ToolStripMenuItem.Name = "缩放ToolStripMenuItem";
-            this.缩放ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.缩放ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.缩放ToolStripMenuItem.Text = "缩放";
             this.缩放ToolStripMenuItem.Click += new System.EventHandler(this.缩放ToolStripMenuItem_Click);
             // 
             // 更改值日岗位责任ToolStripMenuItem
             // 
             this.更改值日岗位责任ToolStripMenuItem.Name = "更改值日岗位责任ToolStripMenuItem";
-            this.更改值日岗位责任ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.更改值日岗位责任ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.更改值日岗位责任ToolStripMenuItem.Text = "更改值日岗位责任";
             this.更改值日岗位责任ToolStripMenuItem.Click += new System.EventHandler(this.更改值日岗位责任ToolStripMenuItem_Click);
             // 
             // 改前景色ToolStripMenuItem
             // 
             this.改前景色ToolStripMenuItem.Name = "改前景色ToolStripMenuItem";
-            this.改前景色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.改前景色ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.改前景色ToolStripMenuItem.Text = "改前景色";
             this.改前景色ToolStripMenuItem.Click += new System.EventHandler(this.改前景色ToolStripMenuItem_Click);
+            // 
+            // creditToolStripMenuItem
+            // 
+            this.creditToolStripMenuItem.Name = "creditToolStripMenuItem";
+            this.creditToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.creditToolStripMenuItem.Text = "Credit!";
+            this.creditToolStripMenuItem.Click += new System.EventHandler(this.creditToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -289,7 +296,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(239, 12);
             this.label2.TabIndex = 13;
-            this.label2.Text = "V1.2试运行中……欢迎提出建设性意见→gwq";
+            this.label2.Text = "V1.3试运行中……欢迎提出建设性意见→gwq";
             // 
             // colorDialog1
             // 
@@ -326,13 +333,6 @@
             this.label3.TabIndex = 16;
             this.label3.Text = "语\r\n文";
             this.label3.Visible = false;
-            // 
-            // creditToolStripMenuItem
-            // 
-            this.creditToolStripMenuItem.Name = "creditToolStripMenuItem";
-            this.creditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.creditToolStripMenuItem.Text = "Credit!";
-            this.creditToolStripMenuItem.Click += new System.EventHandler(this.creditToolStripMenuItem_Click);
             // 
             // form
             // 
