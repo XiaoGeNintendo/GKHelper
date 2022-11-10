@@ -91,7 +91,9 @@ namespace GKHelper
         {
             InitializeComponent();
 
-            //Load Configuration File
+            //Load Base Configuration File
+            double defaultScale = 1.0;
+
             using (StreamReader sr = new StreamReader("Config.txt"))
             {
                 gk = DateTime.Parse(sr.ReadLine());
@@ -105,6 +107,15 @@ namespace GKHelper
                 {
                     MessageBox.Show("Cannot load duty config:\n" + ex.Message + "\n" + ex.StackTrace, "Fatal Error!!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Environment.Exit(2);
+                }
+
+                try
+                {
+                    defaultScale = Double.Parse(sr.ReadLine());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Default scale failed:\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -133,6 +144,8 @@ namespace GKHelper
                 Environment.Exit(1);
             }
 
+            //perform scale
+            ScaleAll(defaultScale);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -355,6 +368,50 @@ namespace GKHelper
             MessageBox.Show("Now Topmost=" + TopMost);
         }
 
+        private void 改字体ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("[Instructions]\nThe system will show up a series of dialogs for every font that is present on the interface. Please perform changes according to the font preloaded into the dialog. Note that the UI may break after a font change.","Instruction",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+            Dictionary<Font, Font> dict = new Dictionary<Font, Font>();
+            foreach(Control i in Controls)
+            {
+                if(i is Label j)
+                {
+                    if (!dict.ContainsKey(i.Font))
+                    {
+                        fontDialog1.Font = j.Font;
+                        fontDialog1.ShowDialog();
+                        dict[j.Font] = fontDialog1.Font;
+                    }
+
+                    j.Font = dict[j.Font];
+                }
+            }
+        }
+
+        private void ScaleAll(double d)
+        {
+            if (d != 1.0)
+            {
+                重载时刻表ToolStripMenuItem.Enabled = false;
+            }
+
+            Width = (int)(Width * d);
+            Height = (int)(Height * d);
+
+            foreach (Control c in Controls)
+            {
+                c.Width = (int)(c.Width * d);
+                c.Height = (int)(c.Height * d);
+                c.Top = (int)(c.Top * d);
+                c.Left = (int)(c.Left * d);
+                if (c is Label l)
+                {
+                    l.Font = new Font(l.Font.Name, (float)(l.Font.Size * d));
+                }
+            }
+        }
+
         private void 缩放ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string res=Interaction.InputBox("[Buggy scaling]\nScaling may corrupt the current layout. Restart the program if something goes wrong.\nScale by:", "Scaling", "1.0");
@@ -362,20 +419,7 @@ namespace GKHelper
             {
                 double d = Double.Parse(res);
 
-                Width = (int)(Width * d);
-                Height = (int)(Height * d);
-
-                foreach(Control c in Controls)
-                {
-                    c.Width = (int)(c.Width * d);
-                    c.Height = (int)(c.Height * d);
-                    c.Top = (int)(c.Top * d);
-                    c.Left = (int)(c.Left * d);
-                    if(c is Label l)
-                    {
-                        l.Font = new Font(l.Font.Name, (float)(l.Font.Size*d)); 
-                    }
-                }
+                ScaleAll(d);
             }catch(FormatException ex)
             {
                 MessageBox.Show("Cannot parse input string as double!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -400,6 +444,7 @@ namespace GKHelper
 
         private void 改前景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("[Instructions]\nThe system will show up a series of dialogs for every color that is present on the interface. Please perform changes according to the color preloaded into the dialog.", "Instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Dictionary<Color, Color> dc = new Dictionary<Color, Color>();
  
             colorDialog1.Color = dn1.ForeColor; //delegate

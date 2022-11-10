@@ -50,7 +50,6 @@
             this.重载时刻表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.背景色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.缩放ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.更改值日岗位责任ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.改前景色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,6 +58,8 @@
             this.rubbishLabel = new System.Windows.Forms.Label();
             this.dn2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.改字体ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -195,8 +196,8 @@
             this.重载时刻表ToolStripMenuItem,
             this.背景色ToolStripMenuItem,
             this.缩放ToolStripMenuItem,
-            this.更改值日岗位责任ToolStripMenuItem,
             this.改前景色ToolStripMenuItem,
+            this.改字体ToolStripMenuItem,
             this.creditToolStripMenuItem});
             this.窗口ToolStripMenuItem.Name = "窗口ToolStripMenuItem";
             this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
@@ -205,77 +206,70 @@
             // 无边框ToolStripMenuItem
             // 
             this.无边框ToolStripMenuItem.Name = "无边框ToolStripMenuItem";
-            this.无边框ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.无边框ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.无边框ToolStripMenuItem.Text = "无边框";
             this.无边框ToolStripMenuItem.Click += new System.EventHandler(this.无边框ToolStripMenuItem_Click);
             // 
             // 有边框ToolStripMenuItem
             // 
             this.有边框ToolStripMenuItem.Name = "有边框ToolStripMenuItem";
-            this.有边框ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.有边框ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.有边框ToolStripMenuItem.Text = "有边框";
             this.有边框ToolStripMenuItem.Click += new System.EventHandler(this.有边框ToolStripMenuItem_Click);
             // 
             // 锁定ToolStripMenuItem
             // 
             this.锁定ToolStripMenuItem.Name = "锁定ToolStripMenuItem";
-            this.锁定ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.锁定ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.锁定ToolStripMenuItem.Text = "锁定";
             this.锁定ToolStripMenuItem.Click += new System.EventHandler(this.锁定ToolStripMenuItem_Click);
             // 
             // 置顶ToolStripMenuItem
             // 
             this.置顶ToolStripMenuItem.Name = "置顶ToolStripMenuItem";
-            this.置顶ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.置顶ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.置顶ToolStripMenuItem.Text = "置顶";
             this.置顶ToolStripMenuItem.Click += new System.EventHandler(this.置顶ToolStripMenuItem_Click);
             // 
             // 置底ToolStripMenuItem
             // 
             this.置底ToolStripMenuItem.Name = "置底ToolStripMenuItem";
-            this.置底ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.置底ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.置底ToolStripMenuItem.Text = "置底";
             this.置底ToolStripMenuItem.Click += new System.EventHandler(this.置底ToolStripMenuItem_Click);
             // 
             // 重载时刻表ToolStripMenuItem
             // 
             this.重载时刻表ToolStripMenuItem.Name = "重载时刻表ToolStripMenuItem";
-            this.重载时刻表ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.重载时刻表ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.重载时刻表ToolStripMenuItem.Text = "重载时刻表";
             this.重载时刻表ToolStripMenuItem.Click += new System.EventHandler(this.重载时刻表ToolStripMenuItem_Click);
             // 
             // 背景色ToolStripMenuItem
             // 
             this.背景色ToolStripMenuItem.Name = "背景色ToolStripMenuItem";
-            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.背景色ToolStripMenuItem.Text = "背景色";
             this.背景色ToolStripMenuItem.Click += new System.EventHandler(this.背景色ToolStripMenuItem_Click);
             // 
             // 缩放ToolStripMenuItem
             // 
             this.缩放ToolStripMenuItem.Name = "缩放ToolStripMenuItem";
-            this.缩放ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.缩放ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.缩放ToolStripMenuItem.Text = "缩放";
             this.缩放ToolStripMenuItem.Click += new System.EventHandler(this.缩放ToolStripMenuItem_Click);
-            // 
-            // 更改值日岗位责任ToolStripMenuItem
-            // 
-            this.更改值日岗位责任ToolStripMenuItem.Name = "更改值日岗位责任ToolStripMenuItem";
-            this.更改值日岗位责任ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.更改值日岗位责任ToolStripMenuItem.Text = "更改值日岗位责任";
-            this.更改值日岗位责任ToolStripMenuItem.Click += new System.EventHandler(this.更改值日岗位责任ToolStripMenuItem_Click);
             // 
             // 改前景色ToolStripMenuItem
             // 
             this.改前景色ToolStripMenuItem.Name = "改前景色ToolStripMenuItem";
-            this.改前景色ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.改前景色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.改前景色ToolStripMenuItem.Text = "改前景色";
             this.改前景色ToolStripMenuItem.Click += new System.EventHandler(this.改前景色ToolStripMenuItem_Click);
             // 
             // creditToolStripMenuItem
             // 
             this.creditToolStripMenuItem.Name = "creditToolStripMenuItem";
-            this.creditToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.creditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.creditToolStripMenuItem.Text = "Credit!";
             this.creditToolStripMenuItem.Click += new System.EventHandler(this.creditToolStripMenuItem_Click);
             // 
@@ -296,7 +290,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(239, 12);
             this.label2.TabIndex = 13;
-            this.label2.Text = "V1.3试运行中……欢迎提出建设性意见→gwq";
+            this.label2.Text = "V1.4试运行中……欢迎提出建设性意见→gwq";
             // 
             // colorDialog1
             // 
@@ -333,6 +327,17 @@
             this.label3.TabIndex = 16;
             this.label3.Text = "语\r\n文";
             this.label3.Visible = false;
+            // 
+            // 改字体ToolStripMenuItem
+            // 
+            this.改字体ToolStripMenuItem.Name = "改字体ToolStripMenuItem";
+            this.改字体ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.改字体ToolStripMenuItem.Text = "改字体";
+            this.改字体ToolStripMenuItem.Click += new System.EventHandler(this.改字体ToolStripMenuItem_Click);
+            // 
+            // fontDialog1
+            // 
+            this.fontDialog1.ShowHelp = true;
             // 
             // form
             // 
@@ -398,9 +403,10 @@
         private System.Windows.Forms.ToolStripMenuItem 缩放ToolStripMenuItem;
         private System.Windows.Forms.Label rubbishLabel;
         private System.Windows.Forms.Label dn2;
-        private System.Windows.Forms.ToolStripMenuItem 更改值日岗位责任ToolStripMenuItem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem 改前景色ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 改字体ToolStripMenuItem;
+        private System.Windows.Forms.FontDialog fontDialog1;
     }
 }
