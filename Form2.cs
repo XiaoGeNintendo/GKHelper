@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualBasic;
+using Newtonsoft.Json;
+using ReaLTaiizor.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +24,8 @@ namespace GKHelper
         IntPtr programIntPtr;
         List<Label> lessonLabels = new List<Label>();
         List<Label> lessonLabels2 = new List<Label>();
+
+        Font lessonLabelFont = new System.Drawing.Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 
         Color colorDayEnd=Color.Gray, colorFinish=Color.Red, colorNext=Color.Green,colorNow=Color.Blue,colorSoon=Color.Lime;
         public DateTime AppendTime(DateTime date, string str)
@@ -61,7 +65,7 @@ namespace GKHelper
                     //create label 1
                     Label lbl = new Label
                     {
-                        Font = new System.Drawing.Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))),
+                        Font = lessonLabelFont,
                         Location = new System.Drawing.Point(3 + 26 * (lessons.Count - 1), 195),
                         Name = "lessonLabel_" + lessons.Count,
                         Size = new System.Drawing.Size(28, 42),
@@ -375,17 +379,164 @@ namespace GKHelper
             Dictionary<Font, Font> dict = new Dictionary<Font, Font>();
             foreach(Control i in Controls)
             {
-                if(i is Label j)
+                if(i is Label j && i.Visible)
                 {
-                    if (!dict.ContainsKey(i.Font))
+                    if (!dict.ContainsKey(j.Font))
                     {
+                        var tmp = j.BackColor;
+                        j.BackColor = (this.BackColor == Color.Red ? Color.Green : Color.Red);
                         fontDialog1.Font = j.Font;
                         fontDialog1.ShowDialog();
                         dict[j.Font] = fontDialog1.Font;
+                        j.BackColor = tmp;
                     }
 
                     j.Font = dict[j.Font];
                 }
+            }
+
+            //reset lesson label font
+            if (lessonLabels.Count >= 1) { 
+                lessonLabelFont = lessonLabels[0].Font;
+            }
+        }
+
+        private void 保存UI设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var x=saveFileDialog1.ShowDialog();
+                string fn = saveFileDialog1.FileName;
+                if (fn == "" || x==DialogResult.Cancel)
+                {
+                    return;
+                }
+                using (StreamWriter sw = new StreamWriter(fn))
+                {
+                    //colors
+                    sw.WriteLine(BackColor.ToArgb());
+                    sw.WriteLine(dn1.ForeColor.ToArgb()); //candidate label
+                    sw.WriteLine(colorDayEnd.ToArgb());
+                    sw.WriteLine(colorFinish.ToArgb());
+                    sw.WriteLine(colorNow.ToArgb());
+                    sw.WriteLine(colorSoon.ToArgb());
+                    sw.WriteLine(colorNext.ToArgb());
+                    //fonts
+                    sw.WriteLine(JsonConvert.SerializeObject(lessonLabelFont));
+                    foreach (Control i in Controls)
+                    {
+                        if (i is Label j && i.Visible && !lessonLabels.Contains(j))
+                        {
+                            sw.WriteLine(j.Name);
+                            sw.WriteLine(JsonConvert.SerializeObject(j.Font));
+                        }
+                    }
+                }
+                MessageBox.Show("Done!","OK",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error occurred when saving:" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+
+        private void 载入UI设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var x=openFileDialog1.ShowDialog();
+                string fn=openFileDialog1.FileName;
+                if (fn == "" || x==DialogResult.Cancel)
+                {
+                    return;
+                }
+                using(StreamReader sr=new StreamReader(fn))
+                {
+                    BackColor = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                    
+                    var tmp = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                    foreach (Control c in Controls)
+                    {
+                        c.ForeColor = tmp;
+                        c.BackColor = BackColor;
+                    }
+
+                    colorDayEnd = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                    colorFinish = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                    colorNow = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                    colorSoon = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                    colorNext = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+
+                    lessonLabelFont = JsonConvert.DeserializeObject<Font>(sr.ReadLine());
+                    foreach(Control i in lessonLabels)
+                    {
+                        i.Font = lessonLabelFont;
+                    }
+
+                    while (true)
+                    {
+                        var name = sr.ReadLine();
+                        if (name == null)
+                        {
+                            break;
+                        }
+                        var font = JsonConvert.DeserializeObject<Font>(sr.ReadLine()); 
+                        foreach(Control i in Controls) { 
+                            if (i is Label j && i.Visible && !lessonLabels.Contains(j) && name==i.Name)
+                            {
+                                if (name != j.Name)
+                                {
+                                    throw new Exception("Failed to verify component name: Expected " + name + " but found " + j.Name+"!");
+                                }
+                                j.Font = font;
+                            }
+                        }
+                    }
+                }
+
+                MessageBox.Show("Done!", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error occurred when loading:" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void 图片背景ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var x = openFileDialog1.ShowDialog();
+                string fn = openFileDialog1.FileName;
+                if (fn == "" || x == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                this.BackgroundImage = Image.FromFile(fn);
+                var xd=Interaction.InputBox("[Beta Feature]\nNOTE: Image background will NOT be saved to configuration file\nSpecify Image Layout:\nNone=0;Tile=1;Center=2;Stretch=3;Zoom=4", "Image Layout", "1");
+                this.BackgroundImageLayout = (ImageLayout)int.Parse(xd);
+                
+                foreach(Control i in Controls)
+                {
+                    try
+                    {
+                        if(i is Separator)
+                        {
+                            i.Visible = false;
+                        }
+                        i.BackColor = Color.Transparent;
+                    }catch(Exception _)
+                    {
+
+                    }
+                }
+
+                MessageBox.Show("Done!", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occurred when loading:" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

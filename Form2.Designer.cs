@@ -53,6 +53,7 @@
             this.改前景色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.改字体ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.保存UI设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -60,6 +61,10 @@
             this.dn2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.载入UI设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.图片背景ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -198,7 +203,10 @@
             this.缩放ToolStripMenuItem,
             this.改前景色ToolStripMenuItem,
             this.改字体ToolStripMenuItem,
-            this.creditToolStripMenuItem});
+            this.creditToolStripMenuItem,
+            this.保存UI设置ToolStripMenuItem,
+            this.载入UI设置ToolStripMenuItem,
+            this.图片背景ToolStripMenuItem});
             this.窗口ToolStripMenuItem.Name = "窗口ToolStripMenuItem";
             this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.窗口ToolStripMenuItem.Text = "窗口";
@@ -206,79 +214,86 @@
             // 无边框ToolStripMenuItem
             // 
             this.无边框ToolStripMenuItem.Name = "无边框ToolStripMenuItem";
-            this.无边框ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.无边框ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.无边框ToolStripMenuItem.Text = "无边框";
             this.无边框ToolStripMenuItem.Click += new System.EventHandler(this.无边框ToolStripMenuItem_Click);
             // 
             // 有边框ToolStripMenuItem
             // 
             this.有边框ToolStripMenuItem.Name = "有边框ToolStripMenuItem";
-            this.有边框ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.有边框ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.有边框ToolStripMenuItem.Text = "有边框";
             this.有边框ToolStripMenuItem.Click += new System.EventHandler(this.有边框ToolStripMenuItem_Click);
             // 
             // 锁定ToolStripMenuItem
             // 
             this.锁定ToolStripMenuItem.Name = "锁定ToolStripMenuItem";
-            this.锁定ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.锁定ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.锁定ToolStripMenuItem.Text = "锁定";
             this.锁定ToolStripMenuItem.Click += new System.EventHandler(this.锁定ToolStripMenuItem_Click);
             // 
             // 置顶ToolStripMenuItem
             // 
             this.置顶ToolStripMenuItem.Name = "置顶ToolStripMenuItem";
-            this.置顶ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.置顶ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.置顶ToolStripMenuItem.Text = "置顶";
             this.置顶ToolStripMenuItem.Click += new System.EventHandler(this.置顶ToolStripMenuItem_Click);
             // 
             // 置底ToolStripMenuItem
             // 
             this.置底ToolStripMenuItem.Name = "置底ToolStripMenuItem";
-            this.置底ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.置底ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.置底ToolStripMenuItem.Text = "置底";
             this.置底ToolStripMenuItem.Click += new System.EventHandler(this.置底ToolStripMenuItem_Click);
             // 
             // 重载时刻表ToolStripMenuItem
             // 
             this.重载时刻表ToolStripMenuItem.Name = "重载时刻表ToolStripMenuItem";
-            this.重载时刻表ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.重载时刻表ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.重载时刻表ToolStripMenuItem.Text = "重载时刻表";
             this.重载时刻表ToolStripMenuItem.Click += new System.EventHandler(this.重载时刻表ToolStripMenuItem_Click);
             // 
             // 背景色ToolStripMenuItem
             // 
             this.背景色ToolStripMenuItem.Name = "背景色ToolStripMenuItem";
-            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.背景色ToolStripMenuItem.Text = "背景色";
             this.背景色ToolStripMenuItem.Click += new System.EventHandler(this.背景色ToolStripMenuItem_Click);
             // 
             // 缩放ToolStripMenuItem
             // 
             this.缩放ToolStripMenuItem.Name = "缩放ToolStripMenuItem";
-            this.缩放ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.缩放ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.缩放ToolStripMenuItem.Text = "缩放";
             this.缩放ToolStripMenuItem.Click += new System.EventHandler(this.缩放ToolStripMenuItem_Click);
             // 
             // 改前景色ToolStripMenuItem
             // 
             this.改前景色ToolStripMenuItem.Name = "改前景色ToolStripMenuItem";
-            this.改前景色ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.改前景色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.改前景色ToolStripMenuItem.Text = "改前景色";
             this.改前景色ToolStripMenuItem.Click += new System.EventHandler(this.改前景色ToolStripMenuItem_Click);
             // 
             // 改字体ToolStripMenuItem
             // 
             this.改字体ToolStripMenuItem.Name = "改字体ToolStripMenuItem";
-            this.改字体ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.改字体ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.改字体ToolStripMenuItem.Text = "改字体";
             this.改字体ToolStripMenuItem.Click += new System.EventHandler(this.改字体ToolStripMenuItem_Click);
             // 
             // creditToolStripMenuItem
             // 
             this.creditToolStripMenuItem.Name = "creditToolStripMenuItem";
-            this.creditToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.creditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.creditToolStripMenuItem.Text = "Credit!";
             this.creditToolStripMenuItem.Click += new System.EventHandler(this.creditToolStripMenuItem_Click);
+            // 
+            // 保存UI设置ToolStripMenuItem
+            // 
+            this.保存UI设置ToolStripMenuItem.Name = "保存UI设置ToolStripMenuItem";
+            this.保存UI设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.保存UI设置ToolStripMenuItem.Text = "保存UI设置";
+            this.保存UI设置ToolStripMenuItem.Click += new System.EventHandler(this.保存UI设置ToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -297,7 +312,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(239, 12);
             this.label2.TabIndex = 13;
-            this.label2.Text = "V1.4试运行中……欢迎提出建设性意见→gwq";
+            this.label2.Text = "V2.0试运行中……欢迎提出建设性意见→gwq";
             // 
             // colorDialog1
             // 
@@ -338,6 +353,32 @@
             // fontDialog1
             // 
             this.fontDialog1.ShowHelp = true;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
+            this.saveFileDialog1.ShowHelp = true;
+            this.saveFileDialog1.Title = "Save UI Configuration";
+            // 
+            // 载入UI设置ToolStripMenuItem
+            // 
+            this.载入UI设置ToolStripMenuItem.Name = "载入UI设置ToolStripMenuItem";
+            this.载入UI设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.载入UI设置ToolStripMenuItem.Text = "载入UI设置";
+            this.载入UI设置ToolStripMenuItem.Click += new System.EventHandler(this.载入UI设置ToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "txt";
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Title = "Load";
+            // 
+            // 图片背景ToolStripMenuItem
+            // 
+            this.图片背景ToolStripMenuItem.Name = "图片背景ToolStripMenuItem";
+            this.图片背景ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.图片背景ToolStripMenuItem.Text = "图片背景";
+            this.图片背景ToolStripMenuItem.Click += new System.EventHandler(this.图片背景ToolStripMenuItem_Click);
             // 
             // form
             // 
@@ -408,5 +449,10 @@
         private System.Windows.Forms.ToolStripMenuItem creditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 改字体ToolStripMenuItem;
         private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.ToolStripMenuItem 保存UI设置ToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem 载入UI设置ToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem 图片背景ToolStripMenuItem;
     }
 }
