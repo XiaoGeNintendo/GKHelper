@@ -24,6 +24,7 @@ namespace GKHelper
         IntPtr programIntPtr;
         List<Label> lessonLabels = new List<Label>();
         List<Label> lessonLabels2 = new List<Label>();
+        string backgroundImagePath = null;
 
         Font lessonLabelFont = new System.Drawing.Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 
@@ -220,6 +221,31 @@ namespace GKHelper
                 subjectLabel.Text = "回家";
             }
 
+            //fix wrong transparency
+            if (BackgroundImage != null)
+            {
+                foreach (Control i in Controls)
+                {
+                    try
+                    {
+                        if (i is Separator)
+                        {
+                            i.Visible = false;
+                            continue;
+                        }
+                        if (i.BackColor != Color.Transparent)
+                        {
+                            Console.WriteLine("Fixed:"+i.Name);
+                            i.BackColor = Color.Transparent;
+                        }
+                    }
+                    catch (Exception _)
+                    {
+
+                    }
+                }
+            }
+            
         }
 
         private void 无边框ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -338,9 +364,20 @@ namespace GKHelper
             ReadTimetable(name);
         }
 
+        private void ClearBG()
+        {
+            if (BackgroundImage != null)
+            {
+                BackgroundImage.Dispose();
+                BackgroundImage = null;
+                backgroundImagePath = null;
+            }
+        }
+
         private void 背景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             colorDialog1.ShowDialog();
+            ClearBG();
             BackColor = colorDialog1.Color;
 
             foreach (Control i in Controls)
@@ -413,6 +450,11 @@ namespace GKHelper
                 }
                 using (StreamWriter sw = new StreamWriter(fn))
                 {
+                    //background image
+                    sw.WriteLine("V21C");
+                    sw.WriteLine(backgroundImagePath);
+                    sw.WriteLine((int)BackgroundImageLayout);
+
                     //colors
                     sw.WriteLine(BackColor.ToArgb());
                     sw.WriteLine(dn1.ForeColor.ToArgb()); //candidate label
@@ -452,6 +494,35 @@ namespace GKHelper
                 }
                 using(StreamReader sr=new StreamReader(fn))
                 {
+
+                    string ver = sr.ReadLine();
+
+                    if (ver != "V21C")
+                    {
+                        MessageBox.Show("Out-dated or Corrupted Configuration File!\n" +
+                            "Configuration verification failed\n" +
+                            "Your configuration file is created with an earlier version of the application,\n" +
+                            "or is corrupted and cannot be loaded anymore.\n"+
+                            "If it was created with V2.0, please update the file by appending:\n" +
+                            "V21C at line 1\n" +
+                            "null at line 2\n" +
+                            "0 at line 3", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    //read bgimg
+                    backgroundImagePath = sr.ReadLine();
+                    if (backgroundImagePath == "")
+                    {
+                        ClearBG();
+                        sr.ReadLine();
+                    }
+                    else
+                    {
+                        ChangeBGImage(backgroundImagePath, (ImageLayout)int.Parse(sr.ReadLine()));
+                    }
+
+                    //read color
                     BackColor = Color.FromArgb(Int32.Parse(sr.ReadLine()));
                     
                     var tmp = Color.FromArgb(Int32.Parse(sr.ReadLine()));
@@ -461,6 +532,7 @@ namespace GKHelper
                         c.BackColor = BackColor;
                     }
 
+                    
                     colorDayEnd = Color.FromArgb(Int32.Parse(sr.ReadLine()));
                     colorFinish = Color.FromArgb(Int32.Parse(sr.ReadLine()));
                     colorNow = Color.FromArgb(Int32.Parse(sr.ReadLine()));
@@ -502,6 +574,32 @@ namespace GKHelper
             }
         }
 
+        private void ChangeBGImage(string fn, ImageLayout layout)
+        {
+            ClearBG();
+
+            backgroundImagePath = fn;
+            this.BackgroundImage = Image.FromFile(fn);
+            this.BackgroundImageLayout = layout;
+            foreach (Control i in Controls)
+            {
+                try
+                {
+                    if (i is Separator)
+                    {
+                        i.Visible = false;
+                        continue;
+                    }
+                    Console.WriteLine(i.Name);
+                    i.BackColor = Color.Transparent;
+                }
+                catch (Exception _)
+                {
+
+                }
+            }
+        }
+
         private void 图片背景ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -513,24 +611,19 @@ namespace GKHelper
                     return;
                 }
 
-                this.BackgroundImage = Image.FromFile(fn);
-                var xd=Interaction.InputBox("[Beta Feature]\nNOTE: Image background will NOT be saved to configuration file\nSpecify Image Layout:\nNone=0;Tile=1;Center=2;Stretch=3;Zoom=4", "Image Layout", "1");
-                this.BackgroundImageLayout = (ImageLayout)int.Parse(xd);
-                
-                foreach(Control i in Controls)
-                {
-                    try
-                    {
-                        if(i is Separator)
-                        {
-                            i.Visible = false;
-                        }
-                        i.BackColor = Color.Transparent;
-                    }catch(Exception _)
-                    {
 
-                    }
+                var xd = Interaction.InputBox("Specify Image Layout:\nNone=0;Tile=1;Center=2;Stretch=3;Zoom=4", "Image Layout", "1");
+                if (xd == "")
+                {
+                    ChangeBGImage(fn, ImageLayout.Tile);
                 }
+                else
+                {
+                    ChangeBGImage(fn, (ImageLayout)int.Parse(xd));
+                }
+
+
+                
 
                 MessageBox.Show("Done!", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -566,6 +659,10 @@ namespace GKHelper
         private void 缩放ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string res=Interaction.InputBox("[Buggy scaling]\nScaling may corrupt the current layout. Restart the program if something goes wrong.\nScale by:", "Scaling", "1.0");
+            if (res == "")
+            {
+                return;
+            }
             try
             {
                 double d = Double.Parse(res);
