@@ -357,7 +357,7 @@ namespace GKHelper
         {
             
             
-            string user = Interaction.InputBox("Please specify configuration:", "No such file", "");
+            string user = Interaction.InputBox("Please specify configuration:", "Reload Timetable", "");
             if(user=="" || user == null)
             {
                 return;
@@ -671,8 +671,7 @@ namespace GKHelper
         
         private void 缩放ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This function has been deprecated. Please change the scaling in Config.txt!", "Deprecated!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
+            MessageBox.Show("This function has been deprecated. Please change the scaling in Config.txt.", "Deprecated!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             string res=Interaction.InputBox("[Buggy scaling]\nScaling may corrupt the current layout. Restart the program if something goes wrong.\nScale by:", "Scaling", "1.0");
             if (res == "")
             {
