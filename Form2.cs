@@ -25,6 +25,7 @@ namespace GKHelper
         List<Label> lessonLabels = new List<Label>();
         List<Label> lessonLabels2 = new List<Label>();
         string backgroundImagePath = null;
+        int tick;
 
         Font lessonLabelFont = new System.Drawing.Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 
@@ -155,6 +156,8 @@ namespace GKHelper
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            tick++;
+
             DateTime now = DateTime.Now;
             nowTimeLabel.Text = now.ToString();
 
@@ -217,6 +220,7 @@ namespace GKHelper
                 {
                     lessonLabels[j].ForeColor = colorDayEnd;
                 }
+
                 timeLabel.Text = "结束";
                 subjectLabel.Text = "回家";
             }
@@ -376,6 +380,7 @@ namespace GKHelper
 
         private void 背景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            colorDialog1.Color = BackColor;
             colorDialog1.ShowDialog();
             ClearBG();
             BackColor = colorDialog1.Color;
@@ -633,12 +638,20 @@ namespace GKHelper
             }
         }
 
+        private void 防睡眠ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Kernel.SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
+            MessageBox.Show("Sleep prevention on!");
+        }
+
         private void ScaleAll(double d)
         {
             if (d != 1.0)
             {
                 重载时刻表ToolStripMenuItem.Enabled = false;
             }
+
+            lessonLabelFont = new Font(lessonLabelFont.Name, (float)(lessonLabelFont.Size * d));
 
             Width = (int)(Width * d);
             Height = (int)(Height * d);
@@ -655,9 +668,11 @@ namespace GKHelper
                 }
             }
         }
-
+        
         private void 缩放ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("This function has been deprecated. Please change the scaling in Config.txt!", "Deprecated!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
             string res=Interaction.InputBox("[Buggy scaling]\nScaling may corrupt the current layout. Restart the program if something goes wrong.\nScale by:", "Scaling", "1.0");
             if (res == "")
             {

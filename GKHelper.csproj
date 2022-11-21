@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Kernel.cs" />
     <Compile Include="User32.cs" />
     <Compile Include="Lesson.cs" />
     <Compile Include="Form2.cs">
