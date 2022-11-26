@@ -27,7 +27,12 @@ namespace GKHelper
         string backgroundImagePath = null;
         int tick;
 
-        Font lessonLabelFont = new System.Drawing.Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        /**
+         * Whether to show the announcement richtext
+         */
+        bool expand = true;
+
+        Font lessonLabelFont = new Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 
         Color colorDayEnd=Color.Gray, colorFinish=Color.Red, colorNext=Color.Green,colorNow=Color.Blue,colorSoon=Color.Lime;
         public DateTime AppendTime(DateTime date, string str)
@@ -152,6 +157,32 @@ namespace GKHelper
 
             //perform scale
             ScaleAll(defaultScale);
+
+            //defaultly no expand & read rtf file
+            ToggleExpand();
+
+            if (!File.Exists(GetTodayAnnouncementFile()))
+            {
+                CompileAnnouncementTemplate();
+            }
+
+        }
+
+
+        public void CompileAnnouncementTemplate()
+        {
+            Console.WriteLine("Creating Announcement File");
+            using (StreamReader sr = new StreamReader("default.rtf"))
+            {
+                using (StreamWriter sw = new StreamWriter(GetTodayAnnouncementFile()))
+                {
+                    var nw = sr.ReadToEnd().Replace("\\{DATE\\}", DateTime.Today.ToShortDateString())
+                        .Replace("\\{FILE\\}", GetTodayAnnouncementFile())
+                        .Replace("\\{TIME\\}", DateTime.Now.ToLongTimeString());
+                    Console.WriteLine(nw);
+                    sw.WriteLine(nw);
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -237,7 +268,7 @@ namespace GKHelper
                             i.Visible = false;
                             continue;
                         }
-                        if (i.BackColor != Color.Transparent)
+                        if (!(i is RichTextBox) && i.BackColor != Color.Transparent)
                         {
                             Console.WriteLine("Fixed:"+i.Name);
                             i.BackColor = Color.Transparent;
@@ -343,8 +374,31 @@ namespace GKHelper
 
         }
 
+        public string GetTodayAnnouncementFile()
+        {
+            DateTime today = DateTime.Today;
+            return "anno_" + today.ToShortDateString().Replace('/','-') + ".rtf";
+        }
+
         private void form_Activated(object sender, EventArgs e)
         {
+            if (expand)
+            {
+                LoadRTF();
+            }
+        }
+
+        public void LoadRTF()
+        {
+            try
+            {
+                richTextBox1.LoadFile(GetTodayAnnouncementFile());
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text = "无法读取" + GetTodayAnnouncementFile() + "：" + ex.Message;
+                Console.WriteLine("Error while loading rich text:" + ex.Message + " " + ex.StackTrace);
+            }
         }
 
         private void form_Load(object sender, EventArgs e)
@@ -510,7 +564,7 @@ namespace GKHelper
                             "or is corrupted and cannot be loaded anymore.\n"+
                             "If it was created with V2.0, please update the file by appending:\n" +
                             "V21C at line 1\n" +
-                            "null at line 2\n" +
+                            "empty string at line 2\n" +
                             "0 at line 3", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
@@ -640,8 +694,43 @@ namespace GKHelper
 
         private void 防睡眠ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Kernel.SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
+            Kernel.SetThreadExecutionState(EXECUTION_STATE.ES_AWAYMODE_REQUIRED | EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
             MessageBox.Show("Sleep prevention on!");
+        }
+
+        private void 展开收缩ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToggleExpand();
+        }
+
+        public void ToggleExpand()
+        {
+            if (expand)
+            {
+                expand = false;
+                Width /= 2;
+            }
+            else
+            {
+                Width *= 2;
+                expand = true;
+                LoadRTF();
+            }
+        }
+
+        private void 重新生成公告模板ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This will replace the current announcement file:" + GetTodayAnnouncementFile() + "\nAre you sure?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                CompileAnnouncementTemplate();
+                LoadRTF();
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            System.Diagnostics.Process.Start(GetTodayAnnouncementFile());
         }
 
         private void ScaleAll(double d)

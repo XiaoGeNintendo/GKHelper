@@ -56,6 +56,7 @@
             this.保存UI设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.载入UI设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图片背景ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.防睡眠ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -65,7 +66,10 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.防睡眠ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.展开收缩ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.重新生成公告模板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -187,7 +191,7 @@
             this.窗口ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(339, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(694, 25);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -208,7 +212,9 @@
             this.保存UI设置ToolStripMenuItem,
             this.载入UI设置ToolStripMenuItem,
             this.图片背景ToolStripMenuItem,
-            this.防睡眠ToolStripMenuItem});
+            this.防睡眠ToolStripMenuItem,
+            this.展开收缩ToolStripMenuItem,
+            this.重新生成公告模板ToolStripMenuItem});
             this.窗口ToolStripMenuItem.Name = "窗口ToolStripMenuItem";
             this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.窗口ToolStripMenuItem.Text = "窗口";
@@ -311,6 +317,13 @@
             this.图片背景ToolStripMenuItem.Text = "图片背景";
             this.图片背景ToolStripMenuItem.Click += new System.EventHandler(this.图片背景ToolStripMenuItem_Click);
             // 
+            // 防睡眠ToolStripMenuItem
+            // 
+            this.防睡眠ToolStripMenuItem.Name = "防睡眠ToolStripMenuItem";
+            this.防睡眠ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.防睡眠ToolStripMenuItem.Text = "防睡眠";
+            this.防睡眠ToolStripMenuItem.Click += new System.EventHandler(this.防睡眠ToolStripMenuItem_Click);
+            // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -328,7 +341,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(239, 12);
             this.label2.TabIndex = 13;
-            this.label2.Text = "V2.2试运行中……欢迎提出建设性意见→gwq";
+            this.label2.Text = "V2.3试运行中……欢迎提出建设性意见→gwq";
             // 
             // colorDialog1
             // 
@@ -382,19 +395,50 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Title = "Load";
             // 
-            // 防睡眠ToolStripMenuItem
+            // richTextBox1
             // 
-            this.防睡眠ToolStripMenuItem.Name = "防睡眠ToolStripMenuItem";
-            this.防睡眠ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.防睡眠ToolStripMenuItem.Text = "防睡眠";
-            this.防睡眠ToolStripMenuItem.Click += new System.EventHandler(this.防睡眠ToolStripMenuItem_Click);
+            this.richTextBox1.AutoWordSelection = true;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(352, 39);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(327, 590);
+            this.richTextBox1.TabIndex = 17;
+            this.richTextBox1.Text = "";
+            // 
+            // 展开收缩ToolStripMenuItem
+            // 
+            this.展开收缩ToolStripMenuItem.Name = "展开收缩ToolStripMenuItem";
+            this.展开收缩ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.展开收缩ToolStripMenuItem.Text = "展开/收缩公告栏";
+            this.展开收缩ToolStripMenuItem.Click += new System.EventHandler(this.展开收缩ToolStripMenuItem_Click);
+            // 
+            // 重新生成公告模板ToolStripMenuItem
+            // 
+            this.重新生成公告模板ToolStripMenuItem.Name = "重新生成公告模板ToolStripMenuItem";
+            this.重新生成公告模板ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.重新生成公告模板ToolStripMenuItem.Text = "重新生成公告模板";
+            this.重新生成公告模板ToolStripMenuItem.Click += new System.EventHandler(this.重新生成公告模板ToolStripMenuItem_Click);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(665, 620);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(17, 12);
+            this.linkLabel1.TabIndex = 18;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "开";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(339, 641);
+            this.ClientSize = new System.Drawing.Size(694, 641);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.rubbishLabel);
             this.Controls.Add(this.dn2);
@@ -464,5 +508,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem 图片背景ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 防睡眠ToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ToolStripMenuItem 展开收缩ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 重新生成公告模板ToolStripMenuItem;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
