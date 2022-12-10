@@ -12,6 +12,11 @@ namespace GKHelper
         public DateTime end;
         public string subject;
 
+        public int Length()
+        {
+            return (int)((end - begin).TotalMinutes);
+        }
+
         public override string ToString()
         {
             return "Lesson "+subject+" "+begin+"-"+end;

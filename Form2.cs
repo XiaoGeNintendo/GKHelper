@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using ReaLTaiizor.Controls;
 using System;
@@ -19,6 +20,9 @@ namespace GKHelper
     {
 
         List<Lesson> lessons=new List<Lesson>();
+        /**
+         * The date for Gaokao
+         */
         DateTime gk;
         bool wallpaper = false;
         IntPtr programIntPtr;
@@ -26,6 +30,12 @@ namespace GKHelper
         List<Label> lessonLabels2 = new List<Label>();
         string backgroundImagePath = null;
         int tick;
+
+        /**
+         * Task Scheduler for toasts
+         */
+        TaskScheduler taskScheduler;
+        bool doToast = true;
 
         /**
          * Whether to show the announcement richtext
@@ -39,6 +49,17 @@ namespace GKHelper
         {
             string[] info = str.Split(':');
             return date.AddHours(Double.Parse(info[0])).AddMinutes(Double.Parse(info[1]));
+        }
+
+        public string GetSubjectHeroImage(string subject)
+        {
+            string pic = "hero/default.png";
+            if (File.Exists("hero/" + subject + ".png"))
+            {
+                pic = "hero/" + subject + ".png";
+            }
+
+            return pic;
         }
 
         public void ReadTimetable(string name)
@@ -68,7 +89,6 @@ namespace GKHelper
                     Lesson l = new Lesson(AppendTime(date, res[0]), AppendTime(date, res[1]), res[2]);
                     Console.WriteLine("New lesson:" + l);
                     lessons.Add(l);
-
                     //create label 1
                     Label lbl = new Label
                     {
@@ -95,6 +115,35 @@ namespace GKHelper
                     //lessonLabels2.Add(lbl2);
                 }
                 Console.WriteLine(lessons.Count + " lessons read!");
+            }
+
+            //Preparing Toasts
+            taskScheduler = new TaskScheduler();
+            for(int i=0;i<lessons.Count;i++)
+            {
+                Lesson l = lessons[i];
+
+
+                taskScheduler.Append(new Toast(l.begin-TimeSpan.FromMinutes(2), l.subject + " 即将开始！",
+                    "共 " + l.Length() + " 分长",
+                    GetSubjectHeroImage(l.subject)));
+
+                taskScheduler.Append(new Toast(l.begin, l.subject + " 开始了！", 
+                    "共 "+l.Length()+" 分长", 
+                    GetSubjectHeroImage(l.subject)));
+                if (i != lessons.Count - 1)
+                {
+                    taskScheduler.Append(new Toast(l.end, l.subject + " 结束了！",
+                        (lessons[i + 1].begin - lessons[i].end).TotalMinutes.ToString() + " 分后是" + lessons[i + 1].subject + "！",
+                        GetSubjectHeroImage(lessons[i + 1].subject)));
+                }
+                else
+                {
+                    taskScheduler.Append(new Toast(l.end, l.subject + " 结束了！",
+                        "结束撒花！(゜▽゜*)♪",
+                        GetSubjectHeroImage("结束")));
+                }
+                
             }
         }
 
@@ -127,6 +176,26 @@ namespace GKHelper
                 catch (Exception ex)
                 {
                     MessageBox.Show("Default scale failed:\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                try
+                {
+                    string tagExpand=sr.ReadLine();
+                    if (tagExpand == "DoExpand")
+                    {
+                        Console.WriteLine("#DoExpand");
+                        ToggleExpand();
+                    }
+                    string tagToast = sr.ReadLine();
+                    if (tagToast == "NoToast")
+                    {
+                        Console.WriteLine("#NoToast");
+                        doToast = false;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Config Tag failed:\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -188,6 +257,11 @@ namespace GKHelper
         private void timer1_Tick(object sender, EventArgs e)
         {
             tick++;
+
+            if (doToast)
+            {
+                taskScheduler.Tick(DateTime.Now);
+            }
 
             DateTime now = DateTime.Now;
             nowTimeLabel.Text = now.ToString();
@@ -731,6 +805,12 @@ namespace GKHelper
         {
 
             System.Diagnostics.Process.Start(GetTodayAnnouncementFile());
+        }
+
+        private void form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Console.Write("Uninstalling Toast");
+            ToastNotificationManagerCompat.Uninstall();
         }
 
         private void ScaleAll(double d)

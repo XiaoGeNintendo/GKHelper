@@ -454,6 +454,7 @@
             this.Name = "form";
             this.Text = "GKHelper";
             this.Activated += new System.EventHandler(this.form_Activated);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.form_FormClosed);
             this.Load += new System.EventHandler(this.form_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.form_Paint);
             this.menuStrip1.ResumeLayout(false);
