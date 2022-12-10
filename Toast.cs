@@ -12,7 +12,7 @@ namespace GKHelper
         public string title;
         public string content;
         public string pic;
-
+        public string audio;
 
         public override string ToString()
         {
@@ -34,12 +34,13 @@ namespace GKHelper
             return x.time > y.time;
         }
 
-        public Toast(DateTime time, string title, string content, string pic)
+        public Toast(DateTime time, string title, string content, string pic, string audio = null)
         {
             this.time = time;
             this.title = title;
             this.content = content;
             this.pic = pic;
+            this.audio = audio;
         }
     }
 }

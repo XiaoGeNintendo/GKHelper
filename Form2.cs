@@ -274,7 +274,7 @@ namespace GKHelper
 
                 if (l.begin<=now && l.end>=now) //in this class
                 {
-                    timeLabel.Text = "还有" + (l.end.Subtract(now).Hours * 60 + l.end.Subtract(now).Minutes) + "分";
+                    timeLabel.Text = "还有" + l.end.Subtract(now).TotalMinutes + "分";
                     subjectLabel.Text = l.subject;
 
                     for (int j = 0; j < lessons.Count; j++)
@@ -296,7 +296,7 @@ namespace GKHelper
                     break;
                 }else if (l.begin > now)
                 {
-                    timeLabel.Text = (l.begin.Subtract(now).Hours * 60 + l.begin.Subtract(now).Minutes) + "分后";
+                    timeLabel.Text = l.begin.Subtract(now).TotalMinutes + "分后";
                     subjectLabel.Text = l.subject;
 
                     for (int j = 0; j < lessons.Count; j++)
@@ -533,7 +533,12 @@ namespace GKHelper
 
         private void creditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This project is brought to you by:\nXGN & Zzzyt\nOpen source at:https://github.com/XiaoGeNintendo/GKHelper \nHell Hole Studios 2022", "Credit!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            MessageBox.Show("This project is brought to you by:\n" +
+                "XGN & Zzzyt\n" +
+                "Open source at:https://github.com/XiaoGeNintendo/GKHelper \n" +
+                "Hell Hole Studios 2022\n"+
+                "Picture By: Pixabay\n" +
+                "Novel AI", "Credit!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void 置顶ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -809,9 +814,19 @@ namespace GKHelper
 
         private void form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Console.Write("Uninstalling Toast");
-            ToastNotificationManagerCompat.Uninstall();
         }
+        private void form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ToastNotificationManagerCompat.Uninstall();
+            Console.WriteLine("Uninstalling Toast");
+        }
+
+        private void 启用吐司ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            doToast = !doToast;
+            MessageBox.Show("Toast=" + doToast);
+        }
+
 
         private void ScaleAll(double d)
         {
