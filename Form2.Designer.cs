@@ -355,7 +355,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(239, 12);
             this.label2.TabIndex = 13;
-            this.label2.Text = "V3.0试运行中……欢迎提出建设性意见→gwq";
+            this.label2.Text = "V2.4试运行中……欢迎提出建设性意见→gwq";
             // 
             // colorDialog1
             // 
