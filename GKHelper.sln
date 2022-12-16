@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GKHelper", "GKHelper.csproj", "{D7F52A2E-F5DB-42E8-9385-7484E49BBEAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GKHelperBand", "..\GKHelperBand\GKHelperBand\GKHelperBand.csproj", "{87E9396D-3B02-43F5-B66B-4D0514314E05}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D7F52A2E-F5DB-42E8-9385-7484E49BBEAA} = {D7F52A2E-F5DB-42E8-9385-7484E49BBEAA}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{D7F52A2E-F5DB-42E8-9385-7484E49BBEAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7F52A2E-F5DB-42E8-9385-7484E49BBEAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7F52A2E-F5DB-42E8-9385-7484E49BBEAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87E9396D-3B02-43F5-B66B-4D0514314E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E9396D-3B02-43F5-B66B-4D0514314E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E9396D-3B02-43F5-B66B-4D0514314E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E9396D-3B02-43F5-B66B-4D0514314E05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

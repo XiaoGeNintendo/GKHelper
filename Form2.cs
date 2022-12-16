@@ -274,7 +274,7 @@ namespace GKHelper
 
                 if (l.begin<=now && l.end>=now) //in this class
                 {
-                    timeLabel.Text = "还有" + l.end.Subtract(now).TotalMinutes + "分";
+                    timeLabel.Text = "还有" + (int)l.end.Subtract(now).TotalMinutes + "分";
                     subjectLabel.Text = l.subject;
 
                     for (int j = 0; j < lessons.Count; j++)
@@ -296,7 +296,7 @@ namespace GKHelper
                     break;
                 }else if (l.begin > now)
                 {
-                    timeLabel.Text = l.begin.Subtract(now).TotalMinutes + "分后";
+                    timeLabel.Text = (int)l.begin.Subtract(now).TotalMinutes + "分后";
                     subjectLabel.Text = l.subject;
 
                     for (int j = 0; j < lessons.Count; j++)
@@ -827,6 +827,42 @@ namespace GKHelper
             MessageBox.Show("Toast=" + doToast);
         }
 
+        private void 创建安装Band脚本ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using(StreamWriter sw=new StreamWriter("InstallBand.bat"))
+            {
+                sw.WriteLine("mkdir \"C:/GKB\"");
+                foreach(string s in Directory.GetFiles(Directory.GetCurrentDirectory()))
+                {
+                    var p = Path.GetFileName(s);
+                    Console.WriteLine(s);
+                    if (p.StartsWith("Config"))
+                    {
+                        Console.WriteLine(s);
+                        sw.WriteLine("copy \"" + s + "\" \"C:/GKB/" + p + "\"");
+                    }
+                }
+                sw.WriteLine("C:/WINDOWS/Microsoft.NET/Framework64/v4.0.30319/regasm.exe /codebase \"" + Directory.GetCurrentDirectory() + "/GKHelperBand.dll\"");
+                sw.WriteLine("taskkill /f /IM explorer.exe\nstart explorer.exe\npause");
+            }
+            using(StreamWriter sw=new StreamWriter("UninstallBand.bat"))
+            {
+                foreach (string s in Directory.GetFiles(Directory.GetCurrentDirectory()))
+                {
+                    var p = Path.GetFileName(s);
+                    Console.WriteLine(s);
+                    if (p.StartsWith("Config"))
+                    {
+                        Console.WriteLine(s);
+                        sw.WriteLine("del \"C:\\GKB\\" + p + "\"");
+                    }
+                }
+                sw.WriteLine("C:/WINDOWS/Microsoft.NET/Framework64/v4.0.30319/regasm.exe /u \"" + Directory.GetCurrentDirectory() + "/GKHelperBand.dll\"");
+                sw.WriteLine("taskkill /f /IM explorer.exe\nstart explorer.exe\npause");
+            }
+
+            MessageBox.Show("Done! Please run InstallBand.bat with admin privilege!", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         private void ScaleAll(double d)
         {

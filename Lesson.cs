@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GKHelper
 {
-    class Lesson
+    public class Lesson
     {
         public DateTime begin;
         public DateTime end;
