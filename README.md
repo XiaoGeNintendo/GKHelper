@@ -5,6 +5,10 @@
 
 在big分支下有大屏版本的代码
 
+（理论上）程序应该运行在 **Windows 10, x64, .NET 4** 系统上。
+
+- 附属工具：[GKHelperBand](https://github.com/XiaoGeNintendo/GKHelperBand)
+
 # 一些说明
 ## Config文件格式
 ```
