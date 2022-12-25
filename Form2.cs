@@ -151,6 +151,8 @@ namespace GKHelper
         {
             InitializeComponent();
 
+            timer1.Enabled = false;
+
             //Load Base Configuration File
             double defaultScale = 1.0;
 
@@ -234,6 +236,9 @@ namespace GKHelper
             {
                 CompileAnnouncementTemplate();
             }
+
+            //run last
+            timer1.Enabled = true;
 
         }
 
@@ -836,7 +841,7 @@ namespace GKHelper
                 {
                     var p = Path.GetFileName(s);
                     Console.WriteLine(s);
-                    if (p.StartsWith("Config"))
+                    if (p.StartsWith("Config") || p.EndsWith(".js"))
                     {
                         Console.WriteLine(s);
                         sw.WriteLine("copy \"" + s + "\" \"C:/GKB/" + p + "\"");
@@ -847,16 +852,7 @@ namespace GKHelper
             }
             using(StreamWriter sw=new StreamWriter("UninstallBand.bat"))
             {
-                foreach (string s in Directory.GetFiles(Directory.GetCurrentDirectory()))
-                {
-                    var p = Path.GetFileName(s);
-                    Console.WriteLine(s);
-                    if (p.StartsWith("Config"))
-                    {
-                        Console.WriteLine(s);
-                        sw.WriteLine("del \"C:\\GKB\\" + p + "\"");
-                    }
-                }
+                sw.WriteLine("del C:\\GKB\\");
                 sw.WriteLine("C:/WINDOWS/Microsoft.NET/Framework64/v4.0.30319/regasm.exe /u \"" + Directory.GetCurrentDirectory() + "/GKHelperBand.dll\"");
                 sw.WriteLine("taskkill /f /IM explorer.exe\nstart explorer.exe\npause");
             }
