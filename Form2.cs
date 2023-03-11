@@ -38,6 +38,16 @@ namespace GKHelper
         bool doToast = true;
 
         /**
+         * Whether to open rtf files by wordpad
+         */
+        bool doWordpad = true;
+
+        /**
+         * Whether to set no border soon
+         */
+        bool doNoBorder = false;
+
+        /**
          * Whether to show the announcement richtext
          */
         bool expand = true;
@@ -156,6 +166,10 @@ namespace GKHelper
             //Load Base Configuration File
             double defaultScale = 1.0;
 
+            /**
+             * Default Theme file for UI
+             */
+            string themeFile = null;
             using (StreamReader sr = new StreamReader("Config.txt"))
             {
                 gk = DateTime.Parse(sr.ReadLine());
@@ -182,7 +196,35 @@ namespace GKHelper
 
                 try
                 {
-                    string tagExpand=sr.ReadLine();
+                    string[] inp = sr.ReadLine().Split(' ');
+                    int x = int.Parse(inp[0]);
+                    int y = int.Parse(inp[1]);
+                    if(x>=0 && y>=0)
+                    {
+                        Console.WriteLine("Set:" + x + " " + y);
+                        StartPosition = FormStartPosition.Manual;
+                        Location = new Point(x, y);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Did not set location");
+                    }
+                }catch(Exception ex)
+                {
+                    MessageBox.Show("Default location failed:\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                try
+                {
+                    themeFile = sr.ReadLine();
+                }catch(Exception ex)
+                {
+                    MessageBox.Show("Default UI file failed:\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                try
+                {
+                    string tagExpand = sr.ReadLine();
                     if (tagExpand == "DoExpand")
                     {
                         Console.WriteLine("#DoExpand");
@@ -193,6 +235,18 @@ namespace GKHelper
                     {
                         Console.WriteLine("#NoToast");
                         doToast = false;
+                    }
+                    string tagWritepad = sr.ReadLine();
+                    if (tagWritepad == "NoWordpad")
+                    {
+                        Console.WriteLine("#NoWordpad");
+                        doWordpad = false;
+                    }
+                    string startupLockLevel = sr.ReadLine();
+                    if (startupLockLevel == "NoBorder")
+                    {
+                        Console.WriteLine("#NoBorder");
+                        doNoBorder = true;
                     }
                 }
                 catch(Exception ex)
@@ -237,6 +291,19 @@ namespace GKHelper
                 CompileAnnouncementTemplate();
             }
 
+            //default theme file
+            try
+            {
+                if (themeFile != "null" && themeFile != null)
+                {
+                    Console.WriteLine("Loading default themeFile:" + themeFile);
+                    LoadUIFrom(themeFile);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Default UI file failed:\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             //run last
             timer1.Enabled = true;
 
@@ -262,6 +329,12 @@ namespace GKHelper
         private void timer1_Tick(object sender, EventArgs e)
         {
             tick++;
+
+            if (doNoBorder)
+            {
+                form.ActiveForm.FormBorderStyle = FormBorderStyle.None;
+                doNoBorder = false;
+            }
 
             if (doToast)
             {
@@ -625,6 +698,84 @@ namespace GKHelper
             
         }
 
+        public void LoadUIFrom(string fn)
+        {
+            using (StreamReader sr = new StreamReader(fn))
+            {
+
+                string ver = sr.ReadLine();
+
+                if (ver != "V21C")
+                {
+                    MessageBox.Show("Out-dated or Corrupted Configuration File!\n" +
+                        "Configuration verification failed\n" +
+                        "Your configuration file is created with an earlier version of the application,\n" +
+                        "or is corrupted and cannot be loaded anymore.\n" +
+                        "If it was created with V2.0, please update the file by appending:\n" +
+                        "V21C at line 1\n" +
+                        "empty string at line 2\n" +
+                        "0 at line 3", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                //read bgimg
+                backgroundImagePath = sr.ReadLine();
+                if (backgroundImagePath == "")
+                {
+                    ClearBG();
+                    sr.ReadLine();
+                }
+                else
+                {
+                    ChangeBGImage(backgroundImagePath, (ImageLayout)int.Parse(sr.ReadLine()));
+                }
+
+                //read color
+                BackColor = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+
+                var tmp = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                foreach (Control c in Controls)
+                {
+                    c.ForeColor = tmp;
+                    c.BackColor = BackColor;
+                }
+
+
+                colorDayEnd = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                colorFinish = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                colorNow = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                colorSoon = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+                colorNext = Color.FromArgb(Int32.Parse(sr.ReadLine()));
+
+                lessonLabelFont = JsonConvert.DeserializeObject<Font>(sr.ReadLine());
+                foreach (Control i in lessonLabels)
+                {
+                    i.Font = lessonLabelFont;
+                }
+
+                while (true)
+                {
+                    var name = sr.ReadLine();
+                    if (name == null)
+                    {
+                        break;
+                    }
+                    var font = JsonConvert.DeserializeObject<Font>(sr.ReadLine());
+                    foreach (Control i in Controls)
+                    {
+                        if (i is Label j && i.Visible && !lessonLabels.Contains(j) && name == i.Name)
+                        {
+                            if (name != j.Name)
+                            {
+                                throw new Exception("Failed to verify component name: Expected " + name + " but found " + j.Name + "!");
+                            }
+                            j.Font = font;
+                        }
+                    }
+                }
+            }
+        }
+
         private void 载入UI设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -635,79 +786,8 @@ namespace GKHelper
                 {
                     return;
                 }
-                using(StreamReader sr=new StreamReader(fn))
-                {
 
-                    string ver = sr.ReadLine();
-
-                    if (ver != "V21C")
-                    {
-                        MessageBox.Show("Out-dated or Corrupted Configuration File!\n" +
-                            "Configuration verification failed\n" +
-                            "Your configuration file is created with an earlier version of the application,\n" +
-                            "or is corrupted and cannot be loaded anymore.\n"+
-                            "If it was created with V2.0, please update the file by appending:\n" +
-                            "V21C at line 1\n" +
-                            "empty string at line 2\n" +
-                            "0 at line 3", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    //read bgimg
-                    backgroundImagePath = sr.ReadLine();
-                    if (backgroundImagePath == "")
-                    {
-                        ClearBG();
-                        sr.ReadLine();
-                    }
-                    else
-                    {
-                        ChangeBGImage(backgroundImagePath, (ImageLayout)int.Parse(sr.ReadLine()));
-                    }
-
-                    //read color
-                    BackColor = Color.FromArgb(Int32.Parse(sr.ReadLine()));
-                    
-                    var tmp = Color.FromArgb(Int32.Parse(sr.ReadLine()));
-                    foreach (Control c in Controls)
-                    {
-                        c.ForeColor = tmp;
-                        c.BackColor = BackColor;
-                    }
-
-                    
-                    colorDayEnd = Color.FromArgb(Int32.Parse(sr.ReadLine()));
-                    colorFinish = Color.FromArgb(Int32.Parse(sr.ReadLine()));
-                    colorNow = Color.FromArgb(Int32.Parse(sr.ReadLine()));
-                    colorSoon = Color.FromArgb(Int32.Parse(sr.ReadLine()));
-                    colorNext = Color.FromArgb(Int32.Parse(sr.ReadLine()));
-
-                    lessonLabelFont = JsonConvert.DeserializeObject<Font>(sr.ReadLine());
-                    foreach(Control i in lessonLabels)
-                    {
-                        i.Font = lessonLabelFont;
-                    }
-
-                    while (true)
-                    {
-                        var name = sr.ReadLine();
-                        if (name == null)
-                        {
-                            break;
-                        }
-                        var font = JsonConvert.DeserializeObject<Font>(sr.ReadLine()); 
-                        foreach(Control i in Controls) { 
-                            if (i is Label j && i.Visible && !lessonLabels.Contains(j) && name==i.Name)
-                            {
-                                if (name != j.Name)
-                                {
-                                    throw new Exception("Failed to verify component name: Expected " + name + " but found " + j.Name+"!");
-                                }
-                                j.Font = font;
-                            }
-                        }
-                    }
-                }
+                LoadUIFrom(fn);
 
                 MessageBox.Show("Done!", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -813,8 +893,14 @@ namespace GKHelper
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
-            System.Diagnostics.Process.Start(GetTodayAnnouncementFile());
+            if (doWordpad)
+            {
+                System.Diagnostics.Process.Start("wordpad", GetTodayAnnouncementFile());
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(GetTodayAnnouncementFile());
+            }
         }
 
         private void form_FormClosed(object sender, FormClosedEventArgs e)
@@ -834,7 +920,21 @@ namespace GKHelper
 
         private void 创建安装Band脚本ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using(StreamWriter sw=new StreamWriter("InstallBand.bat"))
+            using(StreamWriter sw=new StreamWriter("BandSync.bat"))
+            {
+                foreach (string s in Directory.GetFiles(Directory.GetCurrentDirectory()))
+                {
+                    var p = Path.GetFileName(s);
+                    Console.WriteLine(s);
+                    if (p.StartsWith("Config") || p.EndsWith(".js"))
+                    {
+                        Console.WriteLine(s);
+                        sw.WriteLine("copy \"" + s + "\" \"C:/GKB/" + p + "\"");
+                    }
+                }
+                sw.WriteLine("taskkill /f /IM explorer.exe\nstart explorer.exe\npause");
+            }
+            using(StreamWriter sw=new StreamWriter("BandInstall.bat"))
             {
                 sw.WriteLine("mkdir \"C:/GKB\"");
                 foreach(string s in Directory.GetFiles(Directory.GetCurrentDirectory()))
@@ -850,14 +950,23 @@ namespace GKHelper
                 sw.WriteLine("C:/WINDOWS/Microsoft.NET/Framework64/v4.0.30319/regasm.exe /codebase \"" + Directory.GetCurrentDirectory() + "/GKHelperBand.dll\"");
                 sw.WriteLine("taskkill /f /IM explorer.exe\nstart explorer.exe\npause");
             }
-            using(StreamWriter sw=new StreamWriter("UninstallBand.bat"))
+            using(StreamWriter sw=new StreamWriter("BandUninstall.bat"))
             {
                 sw.WriteLine("del C:\\GKB\\");
                 sw.WriteLine("C:/WINDOWS/Microsoft.NET/Framework64/v4.0.30319/regasm.exe /u \"" + Directory.GetCurrentDirectory() + "/GKHelperBand.dll\"");
                 sw.WriteLine("taskkill /f /IM explorer.exe\nstart explorer.exe\npause");
             }
 
-            MessageBox.Show("Done! Please run InstallBand.bat with admin privilege!", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Done! Please run BandInstall.bat with admin privilege!\nRun BandSync.bat when configs are changed!", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void 系统调试工具箱ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string debugInfo = "系统调试信息显示：\n" +
+                "吐司：" + doToast + "\n" +
+                "写字板：" + doWordpad + "\n" +
+                "位置：" + Location + "\n";
+            MessageBox.Show(debugInfo);
         }
 
         private void ScaleAll(double d)

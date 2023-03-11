@@ -1,5 +1,9 @@
 ﻿2023/06/07
 擦黑板|倒垃圾
 1.0
+100 100
+testConfig.txt
 DoExpand
 DoToast
+DoWordpad
+NoBorder

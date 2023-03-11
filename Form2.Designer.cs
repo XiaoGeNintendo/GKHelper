@@ -58,6 +58,7 @@
             this.展开收缩ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重新生成公告模板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.启用吐司ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.创建安装Band脚本ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -70,7 +71,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.创建安装Band脚本ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.系统调试工具箱ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -216,6 +217,7 @@
             this.重新生成公告模板ToolStripMenuItem,
             this.启用吐司ToolStripMenuItem,
             this.创建安装Band脚本ToolStripMenuItem,
+            this.系统调试工具箱ToolStripMenuItem,
             this.creditToolStripMenuItem});
             this.窗口ToolStripMenuItem.Name = "窗口ToolStripMenuItem";
             this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
@@ -267,7 +269,7 @@
             // 
             this.背景色ToolStripMenuItem.Name = "背景色ToolStripMenuItem";
             this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.背景色ToolStripMenuItem.Text = "背景色";
+            this.背景色ToolStripMenuItem.Text = "改背景色";
             this.背景色ToolStripMenuItem.Click += new System.EventHandler(this.背景色ToolStripMenuItem_Click);
             // 
             // 缩放ToolStripMenuItem
@@ -333,6 +335,13 @@
             this.启用吐司ToolStripMenuItem.Text = "启/禁用吐司";
             this.启用吐司ToolStripMenuItem.Click += new System.EventHandler(this.启用吐司ToolStripMenuItem_Click);
             // 
+            // 创建安装Band脚本ToolStripMenuItem
+            // 
+            this.创建安装Band脚本ToolStripMenuItem.Name = "创建安装Band脚本ToolStripMenuItem";
+            this.创建安装Band脚本ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.创建安装Band脚本ToolStripMenuItem.Text = "创建安装Band脚本";
+            this.创建安装Band脚本ToolStripMenuItem.Click += new System.EventHandler(this.创建安装Band脚本ToolStripMenuItem_Click);
+            // 
             // creditToolStripMenuItem
             // 
             this.creditToolStripMenuItem.Name = "creditToolStripMenuItem";
@@ -355,9 +364,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(10, 620);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(281, 12);
+            this.label2.Size = new System.Drawing.Size(239, 12);
             this.label2.TabIndex = 13;
-            this.label2.Text = "V3.0 alpha1试运行中……欢迎提出建设性意见→gwq";
+            this.label2.Text = "V3.1试运行中……欢迎提出建设性意见→gwq";
             // 
             // colorDialog1
             // 
@@ -436,12 +445,12 @@
             this.linkLabel1.Text = "开";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // 创建安装Band脚本ToolStripMenuItem
+            // 系统调试工具箱ToolStripMenuItem
             // 
-            this.创建安装Band脚本ToolStripMenuItem.Name = "创建安装Band脚本ToolStripMenuItem";
-            this.创建安装Band脚本ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.创建安装Band脚本ToolStripMenuItem.Text = "创建安装Band脚本";
-            this.创建安装Band脚本ToolStripMenuItem.Click += new System.EventHandler(this.创建安装Band脚本ToolStripMenuItem_Click);
+            this.系统调试工具箱ToolStripMenuItem.Name = "系统调试工具箱ToolStripMenuItem";
+            this.系统调试工具箱ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.系统调试工具箱ToolStripMenuItem.Text = "系统调试工具箱";
+            this.系统调试工具箱ToolStripMenuItem.Click += new System.EventHandler(this.系统调试工具箱ToolStripMenuItem_Click);
             // 
             // form
             // 
@@ -527,5 +536,6 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ToolStripMenuItem 启用吐司ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 创建安装Band脚本ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 系统调试工具箱ToolStripMenuItem;
     }
 }
