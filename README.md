@@ -15,9 +15,13 @@
 2023/06/07 -- 高考时间
 擦黑板|倒垃圾 -- 值日岗位名称
 1.0 -- 默认缩放
+100 100 -- 程序启动时的窗口位置。设置成负数可以使用Windows默认设置。
+testConfig.txt -- 程序启动时默认样式文件。设置成null可禁用。
 # 从下一行开始是Tag，格式为：DoSomething或NoSomething
 DoExpand -- 是否默认展开公告栏
 DoToast -- 是否默认启用吐司
+DoWordpad -- 是否用写字板打开anno文件
+NoBorder -- 是否启动后关闭外框
 ```
 ## 公告文件模板
 - 详见`default.rtf`
