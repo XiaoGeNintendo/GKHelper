@@ -52,6 +52,13 @@ namespace GKHelper
          */
         bool expand = true;
 
+        /**
+        * The theme file to be loaded next tick
+        * 
+        * Should be set only once
+        */
+        string themeFile = null;
+
         Font lessonLabelFont = new Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 
         Color colorDayEnd=Color.Gray, colorFinish=Color.Red, colorNext=Color.Green,colorNow=Color.Blue,colorSoon=Color.Lime;
@@ -166,10 +173,7 @@ namespace GKHelper
             //Load Base Configuration File
             double defaultScale = 1.0;
 
-            /**
-             * Default Theme file for UI
-             */
-            string themeFile = null;
+            
             using (StreamReader sr = new StreamReader("Config.txt"))
             {
                 gk = DateTime.Parse(sr.ReadLine());
@@ -291,18 +295,6 @@ namespace GKHelper
                 CompileAnnouncementTemplate();
             }
 
-            //default theme file
-            try
-            {
-                if (themeFile != "null" && themeFile != null)
-                {
-                    Console.WriteLine("Loading default themeFile:" + themeFile);
-                    LoadUIFrom(themeFile);
-                }
-            }catch(Exception ex)
-            {
-                MessageBox.Show("Default UI file failed:\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
 
             //run last
             timer1.Enabled = true;
@@ -330,6 +322,22 @@ namespace GKHelper
         {
             tick++;
 
+            //default theme file
+            try
+            {
+                if (themeFile != "null" && themeFile != null)
+                {
+                    Console.WriteLine("Loading default themeFile:" + themeFile);
+                    LoadUIFrom(themeFile);
+                    themeFile = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Default UI file failed:\n" + ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //parse configurations
             if (doNoBorder)
             {
                 form.ActiveForm.FormBorderStyle = FormBorderStyle.None;

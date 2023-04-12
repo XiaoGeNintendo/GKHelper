@@ -2,8 +2,8 @@
 擦黑板|倒垃圾
 1.0
 100 100
-testConfig.txt
+null
 DoExpand
 DoToast
 DoWordpad
-NoBorder
+DoBorder
