@@ -7,3 +7,4 @@ DoExpand
 DoToast
 DoWordpad
 DoBorder
+DoColorBar

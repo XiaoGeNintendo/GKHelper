@@ -94,6 +94,12 @@
   <ItemGroup>
     <Compile Include="Kernel.cs" />
     <Compile Include="TaskScheduler.cs" />
+    <Compile Include="TestSegmentBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TestSegmentBar.Designer.cs">
+      <DependentUpon>TestSegmentBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Toast.cs" />
     <Compile Include="User32.cs" />
     <Compile Include="Lesson.cs" />
@@ -118,6 +124,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TestSegmentBar.resx">
+      <DependentUpon>TestSegmentBar.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="default.rtf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -156,6 +165,9 @@
     </Content>
     <Content Include="Config_Saturday.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DefaultColor.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="hero\default.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

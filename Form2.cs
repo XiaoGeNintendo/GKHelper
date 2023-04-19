@@ -20,6 +20,10 @@ namespace GKHelper
     {
 
         List<Lesson> lessons=new List<Lesson>();
+
+        Dictionary<string, Brush> brushes = new Dictionary<string, Brush>();
+        Dictionary<string, Color> brushColors = new Dictionary<string, Color>();
+
         /**
          * The date for Gaokao
          */
@@ -62,6 +66,7 @@ namespace GKHelper
         Font lessonLabelFont = new Font("华文中宋", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 
         Color colorDayEnd=Color.Gray, colorFinish=Color.Red, colorNext=Color.Green,colorNow=Color.Blue,colorSoon=Color.Lime;
+
         public DateTime AppendTime(DateTime date, string str)
         {
             string[] info = str.Split(':');
@@ -164,6 +169,37 @@ namespace GKHelper
             }
         }
 
+        public void LoadColorPalette(string fn)
+        {
+            brushes = new Dictionary<string, Brush>();
+            using(StreamReader sr=new StreamReader(fn))
+            {
+                //skip first line
+                sr.ReadLine();
+                while (true)
+                {
+                    string[] para=sr.ReadLine().Trim().Split(' ');
+
+                    var color = Color.FromArgb(
+                                (para[0] == "Past" ? 200 : 255),
+                                int.Parse(para[1]),
+                                int.Parse(para[2]),
+                                int.Parse(para[3])
+                            );
+                    brushes[para[0]] = new SolidBrush(color);
+                    brushColors[para[0]] = color;
+
+                    Console.WriteLine("Read from palette:" + para[0] + " " + para[1] + " " + para[2] + " " + para[3]);
+                    if (para[0] == "default")
+                    {
+                        break;
+                    }
+                }
+            }
+
+            tsb.brushes = brushes;
+        }
+
         public form()
         {
             InitializeComponent();
@@ -252,6 +288,12 @@ namespace GKHelper
                         Console.WriteLine("#NoBorder");
                         doNoBorder = true;
                     }
+                    string useColorBar = sr.ReadLine();
+                    if (useColorBar == "NoColorBar")
+                    {
+                        Console.WriteLine("#NoColorBar");
+                        tsb.Visible = false;
+                    }
                 }
                 catch(Exception ex)
                 {
@@ -295,6 +337,10 @@ namespace GKHelper
                 CompileAnnouncementTemplate();
             }
 
+            //load segment bar
+            LoadColorPalette("DefaultColor.txt");
+            tsb.lessons = lessons;
+            tsb.BringToFront();
 
             //run last
             timer1.Enabled = true;
@@ -322,14 +368,19 @@ namespace GKHelper
         {
             tick++;
 
+            //refresh Segment Bar
+            tsb.Refresh();
+
             //default theme file
             try
             {
                 if (themeFile != "null" && themeFile != null)
                 {
+                    
                     Console.WriteLine("Loading default themeFile:" + themeFile);
-                    LoadUIFrom(themeFile);
+                    var tmp = themeFile;
                     themeFile = null;
+                    LoadUIFrom(tmp);
                 }
             }
             catch (Exception ex)
@@ -674,8 +725,19 @@ namespace GKHelper
                 }
                 using (StreamWriter sw = new StreamWriter(fn))
                 {
+                    sw.WriteLine("V22C");
+
+                    //palette
+                    foreach(var y in brushColors)
+                    {
+                        if (y.Key != "default")
+                        {
+                            sw.WriteLine(y.Key + " " + y.Value.R + " " + y.Value.G + " " + y.Value.B);
+                        }
+                    }
+                    sw.WriteLine("default " + brushColors["default"].R + " " + brushColors["default"].G + " " + brushColors["default"].B);
+
                     //background image
-                    sw.WriteLine("V21C");
                     sw.WriteLine(backgroundImagePath);
                     sw.WriteLine((int)BackgroundImageLayout);
 
@@ -713,17 +775,37 @@ namespace GKHelper
 
                 string ver = sr.ReadLine();
 
-                if (ver != "V21C")
+                if (ver != "V22C")
                 {
-                    MessageBox.Show("Out-dated or Corrupted Configuration File!\n" +
+                    if (ver == "V21C")
+                    {
+                        MessageBox.Show("Out-dated Configuration File!\n" +
+                       "Configuration verification failed\n" +
+                       "Your configuration file is created with an earlier version of the application,\n" +
+                       "please update it soon!\n" +
+                       "The program will load it anyway.\n", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Out-dated or Corrupted Configuration File!\n" +
                         "Configuration verification failed\n" +
                         "Your configuration file is created with an earlier version of the application,\n" +
-                        "or is corrupted and cannot be loaded anymore.\n" +
-                        "If it was created with V2.0, please update the file by appending:\n" +
-                        "V21C at line 1\n" +
-                        "empty string at line 2\n" +
-                        "0 at line 3", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                        "or is corrupted and cannot be loaded anymore.\n", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                if (ver == "V22C") {
+                    LoadColorPalette(fn);
+                    //skip till default
+                    while (true)
+                    {
+                        string[] para=sr.ReadLine().Split(' ');
+                        if (para.Length >= 4 && para[0] == "default") 
+                        {
+                            break;
+                        }
+                    }
                 }
 
                 //read bgimg
@@ -975,6 +1057,40 @@ namespace GKHelper
                 "写字板：" + doWordpad + "\n" +
                 "位置：" + Location + "\n";
             MessageBox.Show(debugInfo);
+        }
+
+        private void 改ColorBar颜色ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("[Instructions]\nThe system will show up a series of dialogs for every color that is present in the DefaultColor.txt. Please perform changes according to the color preloaded into the dialog", "Instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var list = brushColors.Keys.ToList();
+            for(int i = 0; i < list.Count; i++)
+            {
+                var key = list[i];
+                var value = brushColors[key];
+
+                MessageBox.Show("Next:" + key);
+                colorDialog1.Color = value;
+                colorDialog1.ShowDialog();
+                var finalColor = colorDialog1.Color;
+                if (key == "Past")
+                {
+                    finalColor = Color.FromArgb(
+                        200,
+                        finalColor.R,
+                        finalColor.G,
+                        finalColor.B);
+                }
+
+                brushColors[key] = finalColor;
+                brushes[key] = new SolidBrush(finalColor);
+            }
+
+            tsb.brushes = brushes;
+        }
+
+        private void 窗口ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void ScaleAll(double d)
