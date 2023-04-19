@@ -22,6 +22,7 @@ DoExpand -- 是否默认展开公告栏
 DoToast -- 是否默认启用吐司
 DoWordpad -- 是否用写字板打开anno文件
 NoBorder -- 是否启动后关闭外框
+DoColorBar -- 是否使用ColorBar
 ```
 ## 公告文件模板
 - 详见`default.rtf`
